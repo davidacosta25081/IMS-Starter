@@ -54,6 +54,37 @@ public class ItemController {
 	}
 
 	
+	/**
+	 * Updates an existing item by taking in user input
+	 */
+	@Override
+	public Item update() {
+		LOGGER.info("Please enter the id of the item you would like to update");
+		Long id = utils.getLong();
+		LOGGER.info("Please enter item's name");
+		String itemName = utils.getString();
+		LOGGER.info("Please enter item's new description");
+		String itemDescription = utils.getString();
+		LOGGER.info("Please enter item's price");
+		Double itemPrice = utils.getDouble();
+		Item item = itemDAO.update(new Item(id, itemName, itemDescription,itemPrice));
+		LOGGER.info("Item Updated");
+		return item;
+	}
+    
+	/**
+	 * Deletes an existing item by the item's id
+	 * 
+	 * @return
+	 */
+	@Override
+	public int delete() {
+		LOGGER.info("Please enter the id of the item you would like to delete");
+		Long id = utils.getLong();
+		return itemDAO.delete(id);
+	}
+
+
 
 }
 
@@ -66,4 +97,4 @@ public class ItemController {
 
 
 
-}
+
