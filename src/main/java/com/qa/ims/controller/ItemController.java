@@ -10,9 +10,10 @@ import com.qa.ims.utils.Utils;
 
 
 
-public class ItemController {
+public class ItemController implements CrudController<Item> {
 
-
+	public static final Logger LOGGER = LogManager.getLogger();
+	
 	private ItemDAO itemDAO;
 	private Utils utils;
 
@@ -26,8 +27,6 @@ public class ItemController {
 	/**
 	 * Reads all items to the logger
 	 */
-	
-	
 	@Override
 	public List<Item> readAll() {
 		List<Item> items = itemDAO.readAll();
