@@ -21,11 +21,10 @@ public class Order {
 	
 	
 	
-	@Override
-	public String toString() {
-		return String.format("ID: %d CustomerID: %d ", this.getOrderId(), this.getCustomerId());
+    public String toString() {
+		return "order id: " + orderId + " customer id: " + customerId + "  Date Ordered: " + dateOfOrder
+				+ "\n";
 	}
-	
 	
 	public Long getOrderId() {
 		return orderId;
@@ -48,7 +47,10 @@ public class Order {
 		this.dateOfOrder = dateOfOrder;
 	}
 	
-
+    
+	
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 7;
