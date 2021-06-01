@@ -48,4 +48,45 @@ public class Order {
 		this.dateOfOrder = dateOfOrder;
 	}
 	
+
+	@Override
+	public int hashCode() {
+		final int prime = 7;
+		int result = 1;
+		result = prime * result + ((orderId == null) ? 0 : Long.hashCode(orderId));
+		result = prime * result + ((customerId == null) ? 0 : Long.hashCode(customerId));
+		result = prime * result + ((dateOfOrder == null) ? 0 : dateOfOrder.hashCode());
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Order other = (Order) obj;
+		// Compare OrderId
+		if (orderId == null) {
+			if (other.orderId != null)
+				return false;
+		} else if (!orderId.equals(other.orderId)) 
+			return false;
+		// Compare CustomerId
+		if (getCustomerId() == null) {
+			if (other.getCustomerId() != null)
+				return false;
+		} else if (!getCustomerId().equals(other.getCustomerId())) 
+			return false;
+		// Compare DateOfOrder
+		if (getDateOfOrder() == null) {
+			if (other.getDateOfOrder() != null)
+				return false;
+		} else if (!getDateOfOrder().equals(other.getDateOfOrder()))
+			return false;
+		return true;
+	}
+
 }
