@@ -5,19 +5,22 @@ public class OrderItem {
 	private Long orderItemId;
     private Long orderId;
     private Long itemId;
-
+    private Long quantity;
+    
     public OrderItem() {
     }
 
-    public OrderItem(Long orderId, Long itemId) {
+    public OrderItem(Long orderId, Long itemId, Long quantity) {
         this.orderId = orderId;
         this.itemId = itemId;
+        this.setQuantity(quantity);
     }
 
-    public OrderItem(Long orderItemId, Long orderId, Long itemId) {
+    public OrderItem(Long orderItemId, Long orderId, Long itemId, Long quantity) {
         this.orderItemId = orderItemId;
         this.orderId = orderId;
         this.itemId = itemId;
+        this.setQuantity(quantity);
     }
 
     public Long getOrderId() {
@@ -44,6 +47,16 @@ public class OrderItem {
         this.orderItemId = orderItemId;
     }
 
+    public Long getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Long quantity) {
+		this.quantity = quantity;
+	}
+
+    
+   
     @Override 
 	public int hashCode() {
 		final int prime = 5;
@@ -91,6 +104,7 @@ public class OrderItem {
 	
 	}
 
+	
 
 
 }
