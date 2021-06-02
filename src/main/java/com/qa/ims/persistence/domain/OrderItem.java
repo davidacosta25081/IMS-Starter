@@ -13,7 +13,7 @@ public class OrderItem {
     public OrderItem(Long orderId, Long itemId, Long quantity) {
         this.orderId = orderId;
         this.itemId = itemId;
-        this.setQuantity(quantity);
+        this.quantity = quantity;
     }
 
     public OrderItem(Long orderItemId, Long orderId, Long itemId, Long quantity) {
