@@ -46,7 +46,7 @@ import com.qa.ims.utils.Utils;
 			LOGGER.info("Please enter a customer ID");
 			Long customerId = utils.getLong();
 			Date dateOfOrder = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-			Order order = orderDAO.createOrder(new Order(customerId,dateOfOrder));
+			Order order = orderDAO.create(new Order(customerId,dateOfOrder));
 			
 			do {
 				LOGGER.info("Please enter a item ID");
@@ -54,7 +54,7 @@ import com.qa.ims.utils.Utils;
 				LOGGER.info("Please enter quantity of item");
 				Long quantity = utils.getLong();
 				
-				orderDAO.createOrderItem(order.getOrderId(),itemId,quantity);
+				//orderDAO.create(order.getOrderId(),itemId,quantity);
 				LOGGER.info("Add more items? .... YES or NOT ");
 				addMore = utils.getString();
 			}while(addMore.toLowerCase().equals("YES"));
@@ -66,26 +66,32 @@ import com.qa.ims.utils.Utils;
 		/**
 		 * Updates an existing order by taking in user input
 		 */
-		@Override
-		public Order update() {
-			LOGGER.info("please enter orderId of order you'd like to update");
-			Long orderId = utils.getLong();
-			LOGGER.info("Please enter itemId of item you'd like to update");
-			Long itemId = utils.getLong();
-			LOGGER.info("please enter the new quantity");
-			Long quantity = utils.getLong();
-			LOGGER.info("order updated");
-			return orderDAO.update(new OrderItem(orderId, itemId, quantity));
-			
-			}
+		//@Override
+//		public Order update() {
+//			LOGGER.info("please enter orderId of order you'd like to update");
+//			Long orderId = utils.getLong();
+//			LOGGER.info("Please enter itemId of item you'd like to update");
+//			Long itemId = utils.getLong();
+//			LOGGER.info("please enter the new quantity");
+//			Long quantity = utils.getLong();
+//			LOGGER.info("order updated");
+//			return orderDAO.update(new OrderItem(orderId, itemId, quantity));
+//			
+//			}
 		
 		@Override
 		
 		public int delete() {
 			LOGGER.info("Please enter the id of the order you would like to delete");
 			Long id = utils.getLong();
-			orderDAO.deleteAllItem(id);
+			orderDAO.delete(id);
 			return orderDAO.delete(id);
+		}
+
+		@Override
+		public Order update() {
+			// TODO Auto-generated method stub
+			return null;
 		}
 
 		
