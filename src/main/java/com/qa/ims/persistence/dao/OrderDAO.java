@@ -69,8 +69,6 @@ public class OrderDAO implements Dao<Order>{
 	
 	
 	
-	
-	
 	@Override
 	public Order create(Order order) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
@@ -97,7 +95,7 @@ public class OrderDAO implements Dao<Order>{
 
 	@Override
 	public Order update(Order t) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

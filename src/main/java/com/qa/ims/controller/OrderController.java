@@ -71,19 +71,22 @@ import com.qa.ims.utils.Utils;
 
 		/**
 		 * Updates an existing order by taking in user input
+		 * @return 
 		 */
-		//@Override
-//		public Order update() {
-//			LOGGER.info("please enter orderId of order you'd like to update");
-//			Long orderId = utils.getLong();
-//			LOGGER.info("Please enter itemId of item you'd like to update");
-//			Long itemId = utils.getLong();
-//			LOGGER.info("please enter the new quantity");
-//			Long quantity = utils.getLong();
-//			LOGGER.info("order updated");
-//			return orderDAO.update(new OrderItem(orderId, itemId, quantity));
-//			
-//			}
+		@Override
+		public Order update() {
+			LOGGER.info("please enter orderId of order you'd like to update");
+			Long orderId = utils.getLong();
+			LOGGER.info("Please enter itemId of item you'd like to update");
+			Long itemId = utils.getLong();
+			LOGGER.info("please enter the new quantity");
+			Long quantity = utils.getLong();
+			LOGGER.info("order updated");
+			orderItemDAO.update(new OrderItem(orderId, itemId, quantity));
+			LOGGER.info("Order successfully updated");
+			return null;
+			
+		}
 		
 		@Override
 		
@@ -94,11 +97,7 @@ import com.qa.ims.utils.Utils;
 			return orderDAO.delete(id);
 		}
 
-		@Override
-		public Order update() {
-			// TODO Auto-generated method stub
-			return null;
-		}
+		
 
 		
 	}

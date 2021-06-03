@@ -75,9 +75,24 @@ public class OrderItemDAO implements Dao<OrderItem> {
 	}
 
 
-	@Override
-	public OrderItem update(OrderItem t) {
-		// TODO Auto-generated method stub
+	public OrderItem update(OrderItem orderItem) {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection
+						.prepareStatement("UPDATE order_items SET order_id = ?, item_id = ? , quantity = ?  WHERE order_id = ?  AND item_id = ?" + 
+								";");) {
+			
+			statement.setLong(1, orderItem.getOrderId());
+			statement.setLong(2, orderItem.getItemId());
+			statement.setLong(3, orderItem.getQuantity());
+			statement.setLong(4, orderItem.getOrderId());
+			statement.setLong(5, orderItem.getItemId());
+			
+			statement.executeUpdate();
+			return read(orderItem.getOrderItemId());
+		} catch (Exception e) {
+			LOGGER.debug(e);
+			LOGGER.error(e.getMessage());
+		}
 		return null;
 	}
 

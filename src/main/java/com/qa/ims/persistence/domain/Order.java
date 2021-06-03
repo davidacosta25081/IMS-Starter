@@ -9,9 +9,9 @@ public class Order {
 	private Date dateOfOrder; 
 	
 	public Order(Long orderId, Long customerId, Date dateOfOrder) {
-		this.setDateOfOrder(dateOfOrder);
 		this.setOrderId(orderId);
-	    this.setDateOfOrder(dateOfOrder);
+		this.setCustomerId(customerId);
+		this.setDateOfOrder(dateOfOrder);
 	}
 	
 	public Order(Long customerId, Date dateOfOrder) {
