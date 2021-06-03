@@ -103,12 +103,13 @@ public class ItemDAO implements Dao<Item> {
 	 * @return
 	 */
 	@Override
-	public Item update(Item items) {
+	public Item update(Item item) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("update items set item_name ='" + items.getName() + "', price ='"
-					+ items.getPrice() + "' where id =" + items.getId());
-			return read(items.getId());
+			statement.executeUpdate("update items SET item_name ='" + item.getName() + "', item_description ='"
+					+ item.getDescription() + "', item_price ='"
+							+ item.getPrice() + "' where id =" + item.getId());
+			return read(item.getId());
 		} catch (Exception e) {
 			LOGGER.debug(e);
 			LOGGER.error(e.getMessage());
