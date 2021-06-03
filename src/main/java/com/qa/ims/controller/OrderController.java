@@ -49,7 +49,7 @@ import com.qa.ims.utils.Utils;
 		@Override
 		public Order create() {
 			
-			LOGGER.info("To create a new Shopping cart (Order) type: CREATE \nto add to an existing one type ADD");
+			LOGGER.info("\nTo CREATE a new Shopping cart (ORDER) type: CREATE \nTo ADD to an existing one type ADD");
             String response = utils.getString();
 			
             if (response.toLowerCase().equals("create")) {
@@ -65,7 +65,7 @@ import com.qa.ims.utils.Utils;
 			  String addMore;
 			do {
 				
-				LOGGER.info("Add items to Shopping Cart (Order) number : ");
+				LOGGER.info("ADD items to Shopping Cart (ORDER) number : ");
 				Long orderId = utils.getLong();
 				LOGGER.info("Please enter item's id");
 				Long itemId = utils.getLong();
@@ -88,15 +88,15 @@ import com.qa.ims.utils.Utils;
 		 */
 		@Override
 		public Order update() {
-			LOGGER.info("please enter orderId of order you'd like to update");
+			LOGGER.info("please enter orderId of order you'd like to UPDATE");
 			Long orderId = utils.getLong();
-			LOGGER.info("Please enter itemId of item you'd like to update");
+			LOGGER.info("Please enter itemId of item you'd like to UPDATE");
 			Long itemId = utils.getLong();
 			LOGGER.info("please enter the new quantity");
 			Long quantity = utils.getLong();
 			LOGGER.info("order updated");
 			orderItemDAO.update(new OrderItem(orderId, itemId, quantity));
-			LOGGER.info("Order successfully updated");
+			LOGGER.info("Order successfully UPDATED");
 			return null;
 			
 		}
@@ -104,7 +104,7 @@ import com.qa.ims.utils.Utils;
 		@Override
 		
 		public int delete() {
-			LOGGER.info("Please enter the id of the order you would like to delete");
+			LOGGER.info("Please enter the ID of the order you would like to DELETE");
 			Long id = utils.getLong();
 			orderDAO.delete(id);
 			return orderDAO.delete(id);
@@ -113,15 +113,16 @@ import com.qa.ims.utils.Utils;
 		
 
 		
-	   public static void getTotal() {
+	   public static double getTotal() {
 		   
-		   LOGGER.info("Enter order's id to get Total from :");
-		   String orderId = utils.getString();
-		   LOGGER.info("___________________\n\nYou want total of " + orderId + 
+		   LOGGER.info("Enter ORDER ID to get TOTAL :\n");
+		   Double orderId = utils.getDouble();
+		   Double total = OrderDAO.getTotalDAO(orderId);
+		   LOGGER.info("___________________\n\nORDER TOTAL : " + total + 
 				   "\n___________________");
 	   
 		   
-	   
+	      return total;
 	   
 	   }
 	   

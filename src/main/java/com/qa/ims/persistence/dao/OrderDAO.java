@@ -118,4 +118,39 @@ public class OrderDAO implements Dao<Order>{
 		return null;
 	}
 
+
+     public static double getTotalDAO(double orderId) {
+    	 double total = 0;
+    	 try (Connection connection = DBUtils.getInstance().getConnection();
+ 				Statement statement = connection.createStatement();
+ 				ResultSet resultSet = statement.executeQuery("SELECT items.item_price, order_items.quantity FROM order_items\n" + 
+ 						"INNER JOIN items ON items.id = order_items.item_id;");) {
+ 			    
+ 			while (resultSet.next()) {
+ 				total += modelTotalFromResultSet(resultSet);
+ 			}
+ 		
+			return total;
+ 		} catch (SQLException e) {
+ 			LOGGER.debug(e);
+ 			LOGGER.error(e.getMessage());
+ 		}
+		return 0;
+ 		
+    	 
+   }
+
+
+     public static double modelTotalFromResultSet(ResultSet resultSet) throws SQLException {
+ 		Double orderQuantity = resultSet.getDouble("quantity");
+ 		Double orderPrice = resultSet.getDouble("item_price");
+ 		
+ 		Double result = orderQuantity * orderPrice;
+ 		return result;
+ 	}
+
+
+
+
+
 }

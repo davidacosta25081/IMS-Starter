@@ -108,9 +108,9 @@ public class IMS {
 		case UPDATE:
 			crudController.update();
 			break;
-		case DELETE:
+	    case DELETE:
 			crudController.delete();
-			break;
+		break;
 		case RETURN:
 			break;
 		default:
