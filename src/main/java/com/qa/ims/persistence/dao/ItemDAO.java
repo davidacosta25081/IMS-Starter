@@ -20,11 +20,11 @@ public class ItemDAO implements Dao<Item> {
 
 	@Override
 	public Item modelFromResultSet(ResultSet resultSet) throws SQLException {
-		
+		Long itemId = resultSet.getLong("id");
 		String itemName = resultSet.getString("item_name");
 		String itemDescription = resultSet.getString("item_description");
 		Double price = resultSet.getDouble("item_price");
-		return new Item(itemName, itemDescription, price);
+		return new Item(itemId,itemName, itemDescription, price);
 	}
 
 	/**
@@ -36,7 +36,7 @@ public class ItemDAO implements Dao<Item> {
 	public List<Item> readAll() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("select * from items");) {
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM items");) {
 			List<Item> items = new ArrayList<>();
 			while (resultSet.next()) {
 				items.add(modelFromResultSet(resultSet));

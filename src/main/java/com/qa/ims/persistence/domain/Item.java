@@ -54,7 +54,7 @@ public class Item {
 	
 	@Override
 	public String toString() {
-		return "id: " + id + "Item's name" + itemName + "Item's description" + itemDescription + "Item's price" + itemPrice;
+		return "|id:  " + id + "|  |Item's name: " + itemName + "|  |Item's description: " + itemDescription +  "|  |Item's price: " + itemPrice +"|";
 		
 	}
 	
@@ -87,7 +87,7 @@ public class Item {
 		if (id == null) {
 			if (other.id != null) 
 				return false;
-		} else if (!id.equals(other.getId()))
+		} else if (!id.equals(other.id))
 			return false;
 		if (itemDescription == null) {
 			if (other.itemDescription != null)
