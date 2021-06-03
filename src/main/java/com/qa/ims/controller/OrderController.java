@@ -19,7 +19,7 @@ import com.qa.ims.utils.Utils;
 
 		private OrderDAO orderDAO;
 		private OrderItemDAO orderItemDAO;
-		private Utils utils;
+		private static Utils utils;
 
 		
 		public OrderController(OrderDAO orderDAO,OrderItemDAO oriDAO, Utils utils) {
@@ -34,6 +34,7 @@ import com.qa.ims.utils.Utils;
 		 * Reads all order to the logger
 		 */
 		@Override
+		
 		public List<Order> readAll() {
 			List<Order> orders = orderDAO.readAll();
 			for (Order order : orders) {
@@ -47,27 +48,39 @@ import com.qa.ims.utils.Utils;
 		 */
 		@Override
 		public Order create() {
-			String addMore;
-			LOGGER.info("Please enter a customer ID");
-			Long customerId = utils.getLong();
-			Date dateOfOrder = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-			Order order = orderDAO.create(new Order(customerId,dateOfOrder));
 			
+			LOGGER.info("To create a new Shopping cart (Order) type: CREATE \nto add to an existing one type ADD");
+            String response = utils.getString();
+			
+            if (response.toLowerCase().equals("create")) {
+		      LOGGER.info("Please enter a customer ID");
+			  Long customerId = utils.getLong();
+			  Date dateOfOrder = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+			  Order order = orderDAO.create(new Order(customerId,dateOfOrder));
+			  return order;
+            }else{
+//			
+			  
+			  
+			  String addMore;
 			do {
 				
-				LOGGER.info("Please enter a item ID");
+				LOGGER.info("Add items to Shopping Cart (Order) number : ");
+				Long orderId = utils.getLong();
+				LOGGER.info("Please enter item's id");
 				Long itemId = utils.getLong();
 				LOGGER.info("Please enter quantity of item");
 				Long quantity = utils.getLong();
-				Long orderId = order.getOrderId();
+				
 				orderItemDAO.create(new OrderItem(orderId,itemId,quantity));
+				
 				LOGGER.info("Add more items? .... YES or NOT ");
 				addMore = utils.getString();
-			}while(addMore.toLowerCase().equals("YES"));
-			LOGGER.info("Order successfully created");
-			
-			return order;
-		}
+			}while(addMore.toLowerCase().equals("yes"));
+			   LOGGER.info("Order successfully created");
+			   return null;
+			 }
+			}
 
 		/**
 		 * Updates an existing order by taking in user input
@@ -100,6 +113,21 @@ import com.qa.ims.utils.Utils;
 		
 
 		
+	   public static void getTotal() {
+		   
+		   LOGGER.info("Enter order's id to get Total from :");
+		   String orderId = utils.getString();
+		   LOGGER.info("___________________\n\nYou want total of " + orderId + 
+				   "\n___________________");
+	   
+		   
+	   
+	   
+	   }
+	   
+	
+	
+	
 	}
 
 
