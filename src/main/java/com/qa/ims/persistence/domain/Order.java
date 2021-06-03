@@ -9,7 +9,7 @@ public class Order {
 	private Date dateOfOrder; 
 	
 	public Order(Long orderId, Long customerId, Date dateOfOrder) {
-		this(customerId, dateOfOrder);
+		this.setDateOfOrder(dateOfOrder);
 		this.setOrderId(orderId);
 	    this.setDateOfOrder(dateOfOrder);
 	}

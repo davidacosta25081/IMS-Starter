@@ -8,7 +8,8 @@ import java.util.List;
 	import org.apache.logging.log4j.Logger;
 
 	import com.qa.ims.persistence.dao.OrderDAO;
-	import com.qa.ims.persistence.domain.Order;
+import com.qa.ims.persistence.dao.OrderItemDAO;
+import com.qa.ims.persistence.domain.Order;
 import com.qa.ims.persistence.domain.OrderItem;
 import com.qa.ims.utils.Utils;
 
@@ -17,12 +18,16 @@ import com.qa.ims.utils.Utils;
 		public static final Logger LOGGER = LogManager.getLogger();
 
 		private OrderDAO orderDAO;
+		private OrderItemDAO orderItemDAO;
 		private Utils utils;
 
-		public OrderController(OrderDAO orderDAO, Utils utils) {
+		
+		public OrderController(OrderDAO orderDAO,OrderItemDAO oriDAO, Utils utils) {
 			super();
 			this.orderDAO = orderDAO;
+			this.orderItemDAO = oriDAO;
 			this.utils = utils;
+		
 		}
 
 		/**
@@ -49,12 +54,13 @@ import com.qa.ims.utils.Utils;
 			Order order = orderDAO.create(new Order(customerId,dateOfOrder));
 			
 			do {
+				
 				LOGGER.info("Please enter a item ID");
 				Long itemId = utils.getLong();
 				LOGGER.info("Please enter quantity of item");
 				Long quantity = utils.getLong();
-				
-				//orderDAO.create(order.getOrderId(),itemId,quantity);
+				Long orderId = order.getOrderId();
+				orderItemDAO.create(new OrderItem(orderId,itemId,quantity));
 				LOGGER.info("Add more items? .... YES or NOT ");
 				addMore = utils.getString();
 			}while(addMore.toLowerCase().equals("YES"));
