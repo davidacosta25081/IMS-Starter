@@ -6,16 +6,17 @@ import org.junit.Test;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 
-public class CustomerTest {
+public class OrderItemTest {
+
 
 	@Test
 	public void testEquals() {
-		EqualsVerifier.simple().forClass(Customer.class).verify();
+		EqualsVerifier.simple().forClass(OrderItem.class).verify();
 	}
 
 	@Test
 	public void CheckConstructor() {
-		assertTrue(new Customer("David", "Acosta") instanceof Customer);
+		assertTrue(new OrderItem(1l,2l,3l,4l) instanceof OrderItem);
 	}
 	
 	
@@ -23,9 +24,9 @@ public class CustomerTest {
 
 	@Test
 	public void CheckConstructor2() {
-		assertTrue(new Customer(1l,"Lionel","Messi") instanceof Customer);
+		assertTrue(new OrderItem(1l,2l,3l) instanceof OrderItem);
 	}
 
 
-    
+
 }
