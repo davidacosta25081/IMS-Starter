@@ -47,12 +47,12 @@ public class IMS {
 	}
 
 	public void imsSystem() {
-		LOGGER.info("Welcome to the Inventory Management System!");
+		LOGGER.info("WELCOME TO INVENTORY MANAGEMENT SYSTEM! \n");
 		DBUtils.connect();
 
 		Domain domain = null;
 		do {
-			LOGGER.info("Which entity would you like to use?");
+			LOGGER.info("Which entity would you like to use? \n");
 			Domain.printDomains();
 
 			domain = Domain.getDomain(utils);
@@ -83,7 +83,7 @@ public class IMS {
 				break;
 			}
 
-			LOGGER.info(() ->"What would you like to do with " + domain.name().toLowerCase() + ":");
+			LOGGER.info(() ->"\nWhat would you like to do with " + domain.name().toLowerCase() + ": \n");
 
 			Action.printActions();
 			Action action = Action.getAction(utils);
@@ -103,13 +103,14 @@ public class IMS {
 			break;
 		case READ:
 			crudController.readAll();
+			
 			break;
 		case UPDATE:
 			crudController.update();
 			break;
-		case DELETE:
+	    case DELETE:
 			crudController.delete();
-			break;
+		break;
 		case RETURN:
 			break;
 		default:

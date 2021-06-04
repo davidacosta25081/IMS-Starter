@@ -19,7 +19,7 @@ import com.qa.ims.utils.Utils;
 
 		private OrderDAO orderDAO;
 		private OrderItemDAO orderItemDAO;
-		private Utils utils;
+		private static Utils utils;
 
 		
 		public OrderController(OrderDAO orderDAO,OrderItemDAO oriDAO, Utils utils) {
@@ -34,11 +34,14 @@ import com.qa.ims.utils.Utils;
 		 * Reads all order to the logger
 		 */
 		@Override
+		
 		public List<Order> readAll() {
 			List<Order> orders = orderDAO.readAll();
 			for (Order order : orders) {
 				LOGGER.info(order.toString());
 			}
+			
+			getTotal();
 			return orders;
 		}
 		
@@ -47,27 +50,39 @@ import com.qa.ims.utils.Utils;
 		 */
 		@Override
 		public Order create() {
-			String addMore;
-			LOGGER.info("Please enter a customer ID");
-			Long customerId = utils.getLong();
-			Date dateOfOrder = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-			Order order = orderDAO.create(new Order(customerId,dateOfOrder));
 			
+			LOGGER.info("\nTo CREATE a new Shopping cart (ORDER) type: CREATE \nTo ADD to an existing one type ADD");
+            String response = utils.getString();
+			
+            if (response.toLowerCase().equals("create")) {
+		      LOGGER.info("Please enter a customer ID");
+			  Long customerId = utils.getLong();
+			  Date dateOfOrder = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+			  Order order = orderDAO.create(new Order(customerId,dateOfOrder));
+			  return order;
+            }else{
+//			
+			  
+			  
+			  String addMore;
 			do {
 				
-				LOGGER.info("Please enter a item ID");
+				LOGGER.info("ADD items to Shopping Cart (ORDER) number : ");
+				Long orderId = utils.getLong();
+				LOGGER.info("Please enter item's id");
 				Long itemId = utils.getLong();
 				LOGGER.info("Please enter quantity of item");
 				Long quantity = utils.getLong();
-				Long orderId = order.getOrderId();
+				
 				orderItemDAO.create(new OrderItem(orderId,itemId,quantity));
+				
 				LOGGER.info("Add more items? .... YES or NOT ");
 				addMore = utils.getString();
-			}while(addMore.toLowerCase().equals("YES"));
-			LOGGER.info("Order successfully created");
-			
-			return order;
-		}
+			}while(addMore.toLowerCase().equals("yes"));
+			   LOGGER.info("Order successfully created");
+			   return null;
+			 }
+			}
 
 		/**
 		 * Updates an existing order by taking in user input
@@ -75,15 +90,17 @@ import com.qa.ims.utils.Utils;
 		 */
 		@Override
 		public Order update() {
-			LOGGER.info("please enter orderId of order you'd like to update");
+			OrderItemDAO.seeOrdersToUpdate();
+			LOGGER.info("please enter ID of ORDER you'd like to UPDATE");
+			Long orderItemId = utils.getLong();
+			LOGGER.info("please enter orderId you'd like to UPDATE");
 			Long orderId = utils.getLong();
-			LOGGER.info("Please enter itemId of item you'd like to update");
+			LOGGER.info("Please enter ID of ITEM you'd like to UPDATE");
 			Long itemId = utils.getLong();
-			LOGGER.info("please enter the new quantity");
+			LOGGER.info("please enter the new QUANTITY");
 			Long quantity = utils.getLong();
-			LOGGER.info("order updated");
-			orderItemDAO.update(new OrderItem(orderId, itemId, quantity));
-			LOGGER.info("Order successfully updated");
+			orderItemDAO.update(new OrderItem(orderItemId,orderId, itemId, quantity));
+			LOGGER.info("Order successfully UPDATED");
 			return null;
 			
 		}
@@ -91,7 +108,7 @@ import com.qa.ims.utils.Utils;
 		@Override
 		
 		public int delete() {
-			LOGGER.info("Please enter the id of the order you would like to delete");
+			LOGGER.info("Please enter the ID of the order you would like to DELETE");
 			Long id = utils.getLong();
 			orderDAO.delete(id);
 			return orderDAO.delete(id);
@@ -100,10 +117,26 @@ import com.qa.ims.utils.Utils;
 		
 
 		
+	   public static double getTotal() {
+		   
+		   LOGGER.info("Enter ORDER ID to get TOTAL :\n");
+		   Double orderId = utils.getDouble();
+		   Double total = OrderDAO.getTotalDAO(orderId);
+		   LOGGER.info("___________________\n\nORDER TOTAL : " + total + 
+				   "\n___________________");
+	   
+		   
+	      return total;
+	   
+	   }
+	   
+	
+	
+	
 	}
 
 
-
+	
 
 
 
