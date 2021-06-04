@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -13,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.qa.ims.persistence.domain.Customer;
 import com.qa.ims.persistence.domain.Item;
+import com.qa.ims.persistence.domain.Order;
 import com.qa.ims.persistence.domain.OrderItem;
 import com.qa.ims.utils.DBUtils;
 
@@ -76,16 +78,17 @@ public class OrderItemDAO implements Dao<OrderItem> {
 
 
 	public OrderItem update(OrderItem orderItem) {
+
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
-						.prepareStatement("UPDATE order_items SET order_id = ?, item_id = ? , quantity = ?  WHERE order_id = ?  AND item_id = ?" + 
+						.prepareStatement("UPDATE order_items SET order_id = ?, item_id = ? , quantity = ?  WHERE id = ?" + 
 								";");) {
 			
 			statement.setLong(1, orderItem.getOrderId());
 			statement.setLong(2, orderItem.getItemId());
 			statement.setLong(3, orderItem.getQuantity());
-			statement.setLong(4, orderItem.getOrderId());
-			statement.setLong(5, orderItem.getItemId());
+			statement.setLong(4, orderItem.getOrderItemId());
+			
 			
 			statement.executeUpdate();
 			return read(orderItem.getOrderItemId());
@@ -96,6 +99,49 @@ public class OrderItemDAO implements Dao<OrderItem> {
 		return null;
 	}
 
+	
+	public static  OrderItem seeOrdersToUpdate(){
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				Statement statement = connection.createStatement();
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM order_items");) {
+			List<OrderItem> orders = new ArrayList<>();
+			while (resultSet.next()) {
+				Long iD = resultSet.getLong("id");
+				Long orderId = resultSet.getLong("order_id");
+				Long itemId = resultSet.getLong("item_id");
+				Long quantity = resultSet.getLong("quantity");
+				OrderItem order = new OrderItem(iD,orderId, itemId, quantity);
+				
+				orders.add(order);
+			
+			}
+			for (OrderItem order : orders) {
+			  LOGGER.info(order.toString());	
+				
+			}
+			
+		} catch (SQLException e) {
+			LOGGER.debug(e);
+			LOGGER.error(e.getMessage());
+		}
+		return null;
+		
+	
+	
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
 	@Override
 	public int delete(long id) {
 		// TODO Auto-generated method stub

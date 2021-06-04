@@ -103,7 +103,7 @@ public class IMS {
 			break;
 		case READ:
 			crudController.readAll();
-			OrderController.getTotal();
+			
 			break;
 		case UPDATE:
 			crudController.update();

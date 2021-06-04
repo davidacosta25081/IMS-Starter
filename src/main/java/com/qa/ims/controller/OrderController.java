@@ -40,6 +40,8 @@ import com.qa.ims.utils.Utils;
 			for (Order order : orders) {
 				LOGGER.info(order.toString());
 			}
+			
+			getTotal();
 			return orders;
 		}
 		
@@ -88,14 +90,16 @@ import com.qa.ims.utils.Utils;
 		 */
 		@Override
 		public Order update() {
-			LOGGER.info("please enter orderId of order you'd like to UPDATE");
+			OrderItemDAO.seeOrdersToUpdate();
+			LOGGER.info("please enter ID of ORDER you'd like to UPDATE");
+			Long orderItemId = utils.getLong();
+			LOGGER.info("please enter orderId you'd like to UPDATE");
 			Long orderId = utils.getLong();
-			LOGGER.info("Please enter itemId of item you'd like to UPDATE");
+			LOGGER.info("Please enter ID of ITEM you'd like to UPDATE");
 			Long itemId = utils.getLong();
-			LOGGER.info("please enter the new quantity");
+			LOGGER.info("please enter the new QUANTITY");
 			Long quantity = utils.getLong();
-			LOGGER.info("order updated");
-			orderItemDAO.update(new OrderItem(orderId, itemId, quantity));
+			orderItemDAO.update(new OrderItem(orderItemId,orderId, itemId, quantity));
 			LOGGER.info("Order successfully UPDATED");
 			return null;
 			
@@ -132,7 +136,7 @@ import com.qa.ims.utils.Utils;
 	}
 
 
-
+	
 
 
 

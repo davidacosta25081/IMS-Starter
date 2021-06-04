@@ -124,8 +124,8 @@ public class OrderDAO implements Dao<Order>{
     	 try (Connection connection = DBUtils.getInstance().getConnection();
  				Statement statement = connection.createStatement();
  				ResultSet resultSet = statement.executeQuery("SELECT items.item_price, order_items.quantity FROM order_items\n" + 
- 						"INNER JOIN items ON items.id = order_items.item_id;");) {
- 			    
+ 			      "INNER JOIN items ON items.id = order_items.item_id WHERE order_items.order_id = "+ orderId);) {
+ 			  
  			while (resultSet.next()) {
  				total += modelTotalFromResultSet(resultSet);
  			}

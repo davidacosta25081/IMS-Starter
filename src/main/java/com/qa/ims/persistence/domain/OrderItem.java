@@ -64,11 +64,12 @@ public class OrderItem {
 		result = prime * result + ((orderItemId == null) ? 0 : Long.hashCode(orderItemId));
 		result = prime * result + ((orderId == null) ? 0 : Long.hashCode(orderId));
 		result = prime * result + ((itemId == null) ? 0 : Long.hashCode(itemId));
+		result = prime * result + ((quantity == null) ? 0 : Long.hashCode(quantity));
 		return result;
 	}
 	
     public String toString() {
-		return "orderItem id: " + orderItemId + " order id: " + orderId + " item id: " + itemId
+		return "ID : " + orderItemId +"  orderID : " + orderId + "  item ID : " + itemId + "  quantity : " + quantity  
 				+ "\n";
 	}
     
