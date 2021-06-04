@@ -1,68 +1,37 @@
-Coverage: 34%
-# Project Title
+Testing Coverage: (In progress)
 
-One Paragraph of project description goes here
+# IMS-Starter
 
+This app creates an inventory management system (or inventory system) which would allow a business to track goods throughout the entire supply chain, from purchasing to sales. the creation of an order is the equivalent to the creation of a shopping cart. Then it's functionality allows to add items to existing orders. The CRUD functionality  that governs the controllers of the application allows for Just reading,updating and deleting fields from a MYSQL Data Base.
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+Java (Installation process) : 
 
-```
-Give examples
-```
+https://www3.ntu.edu.sg/home/ehchua/programming/howto/JDK_Howto.html
 
-### Installing
+MySQL (Instalation Process) : 
 
-A step by step series of examples that tell you how to get a development env running
+https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/
 
-Say what the step will be
+Maven (Instalation process) :
 
-```
-Give the example
-```
+https://maven.apache.org/install.html
 
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
 
 ## Running the tests
 
-Explain how to run the automated tests for this system. Break down into which tests and what they do
+If you have any IDE installed such as Eclipse you can click on a project and run "Coverage As" allowing JUnit to make results available in the code coverage results view.
 
 ### Unit Tests 
 
-Explain what these tests test, why and how to run them
+This trail is about unit testing in Java. The app uses JUnit, a Regression Testing Framework used to implement unit testing in Java, and accelerate programming speed and increase the quality of code. JUnit tests the smaller units of the application, like classes and methods. ... These Unit tests are typically automated, meaning once they are implemented, they can be run again and again.
 
-```
-Give an example
-```
 
-### Integration Tests 
-Explain what these tests test, why and how to run them
 
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Built With
 
@@ -84,6 +53,6 @@ This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Thank JHHarry444 for giving me the basic structure of the application. A great + functioning starting point.
+* Thank you to my Instructor Alan Davis from QA for sharing your great coding skills and constant support.
+* Muchas gracias to QA+Infosys Bootcaamp for presenting us with this great but enriching challenge.
